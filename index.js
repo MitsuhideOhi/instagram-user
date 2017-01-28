@@ -8,6 +8,7 @@ module.exports = user => {
 	}
 
 	return got(`http://instagram.com/${user}/?__a=1`, {json: true}).then(res => ({
+		profile_icon: res.body.user.profile_pic_url || '',
 		description: res.body.user.biography || '',
 		email: getEmails(res.body.user.biography || '')[0] || '',
 		followers: res.body.user.followed_by.count,
